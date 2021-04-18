@@ -12,23 +12,22 @@ bool CopyApp::OnInit()
 	// load the specified xml resource file
 	wxXmlResource::Get()->Load("../../../src/include/gui.xrc");
 	
-	// point the wxFrame* win variable at the resource named "mainWindow" in the loaded XML resource files
-	win = wxXmlResource::Get()->LoadFrame(NULL, "mainWindow");
+	// set the gui manager's frame to the specified xrc resource
+	guiManager.SetMainWindow(wxXmlResource::Get()->LoadFrame(NULL, "mainWindow"));
 	
-	// set the wxIcon mainIcon variable to hold the value of the specified file, allowing wxWidgets to figure out the bitmap type
-	mainIcon = wxIcon("../../../src/include/Icon16.png", wxBITMAP_TYPE_ANY);
+	// use the gui manager to set the frame's icon to the value of the specified file, allowing wxWidgets to figure out the bitmap type
+	guiManager.SetMainWindowIcon(wxIcon("../../../src/include/Icon16.png", wxBITMAP_TYPE_ANY));
 	
-	// assign mainIcon as the icon for win
-	win->SetIcon(mainIcon);
-	// make win visible
-	win->Show(true);
-	// set the top level window in the application to be win
-	SetTopWindow(win);
+	// make guiManager visible
+	guiManager.GetMainWindow()->Show(true);
+	
+	// set the top level window in the application to be the gui manager's main window
+	SetTopWindow(guiManager.GetMainWindow());
 
-	// search win for resources with specified names of specified types, then bind their button_clicked events to command event handlers so that the events get processed by the app
-	XRCCTRL(*win, "copyButton", wxButton)->Bind(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(CopyApp::OnCopyEntered), this, XRCID("copyButton"));
-	XRCCTRL(*win, "wxID_OK", wxButton)->Bind(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(CopyApp::OnOK), this, XRCID("wxID_OK"));
-	XRCCTRL(*win, "wxID_CANCEL", wxButton)->Bind(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(CopyApp::OnCancel), this, XRCID("wxID_CANCEL"));
+	// search guiManager for resources with specified names of specified types, then bind their button_clicked events to command event handlers so that the events get processed by the app
+	XRCCTRL(*(guiManager.GetMainWindow()), "copyButton", wxButton)->Bind(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(CopyApp::OnCopyEntered), this, XRCID("copyButton"));
+	XRCCTRL(*(guiManager.GetMainWindow()), "wxID_OK", wxButton)->Bind(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(CopyApp::OnOK), this, XRCID("wxID_OK"));
+	XRCCTRL(*(guiManager.GetMainWindow()), "wxID_CANCEL", wxButton)->Bind(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(CopyApp::OnCancel), this, XRCID("wxID_CANCEL"));
 	
 	// return true if function completes successfully
 	return true;
@@ -37,6 +36,9 @@ bool CopyApp::OnInit()
 // define the OnExit function, which runs when the program is closed
 int CopyApp::OnExit()
 {
+	// shutdown the gui manager
+	guiManager.Close();
+
 	// exit application with a status code of 0
 	exit(0);
 }
@@ -110,9 +112,9 @@ bool CopyApp::CopyFile(const std::string& source, const std::string& destination
 void CopyApp::OnCopyEntered(wxCommandEvent& event)
 {
 	// read contents of "sourceEntry" resource, a wxFilePickerCtrl, convert from wxString to std::string, and pass to setter for sourceFile
-	SetSourceFile(XRCCTRL(*win, "sourceEntry", wxFilePickerCtrl)->GetPath().ToStdString());
+	SetSourceFile(XRCCTRL(*(guiManager.GetMainWindow()), "sourceEntry", wxFilePickerCtrl)->GetPath().ToStdString());
 	// read contents of "destinationEntry" resource, a wxFilePickerCtrl, convert from wxString to std::string, and pass to setter for destinationFile 
-	SetDestinationFile(XRCCTRL(*win, "destinationEntry", wxFilePickerCtrl)->GetPath().ToStdString());
+	SetDestinationFile(XRCCTRL(*(guiManager.GetMainWindow()), "destinationEntry", wxFilePickerCtrl)->GetPath().ToStdString());
 	// call workhorse function to copy source file to destination file, using getters to ensure safe access to private variables
 	CopyFile(GetSourceFile(), GetDestinationFile());
 }

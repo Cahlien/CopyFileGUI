@@ -14,7 +14,7 @@ include(${wxWidgets_USE_FILE})
 add_executable(${PROJECT_NAME})
 
 # specify the source files for the executable with the same name as the project 
-target_sources(${PROJECT_NAME} PRIVATE src/main.cpp)
+target_sources(${PROJECT_NAME} PRIVATE src/main.cpp src/guimanager.cpp)
 
 # link the wxWidgets libraries to the executable with the same name as the project
 target_link_libraries(${PROJECT_NAME} PRIVATE ${wxWidgets_LIBRARIES})
