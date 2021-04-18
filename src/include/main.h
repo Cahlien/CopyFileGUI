@@ -1,15 +1,19 @@
 #ifndef _MAIN_APPLICATION_H_
 	#define _MAIN_APPLICATION_H_ 1
-		
+	
+	#include <chrono>
 	#include <fstream>						// needed for std::ifstream and std::ofstream
 	#include <iostream>						// needed to handle standard input and output
+	#include <thread>
+	#include <mutex>
 	#include <wx/app.h>						// defines wxDECLARE_APP macro, which isn't really required here, but is used
 	#include <wx/wx.h>						// needed for all wxWidgets applications
 	#include <wx/filepicker.h>			// needed for our wxFilePickerCtrls
 	#include <wx/xrc/xmlres.h>			// needed for our XML resources
 
 	#include "guimanager.h"
-
+	#include "copier.h"
+	
 	// define the wxDELETE macro for pointers, if not using smart pointers
 	#define wxDELETE(p) if((p) != NULL) { delete p; p = NULL; }
 

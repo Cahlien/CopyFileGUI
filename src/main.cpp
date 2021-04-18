@@ -67,56 +67,18 @@ void CopyApp::SetDestinationFile(const std::string& name)
 	destinationFile = name;
 }
 
-// define the function that actually copies the file
-bool CopyApp::CopyFile(const std::string& source, const std::string& destination)
-{
-	// try block so it can fail gracefully
-	try
-	{
-		// instantiate input and output files and a string variable to transfer the data
-		std::ifstream inFile{};
-		std::ofstream outFile{};
-		std::string line{};
-		
-		// use input file as a resource handle for the opensource file
-		inFile.open(source);
-		// use output file as a resource handle for the open destination file
-		outFile.open(destination);
-		
-		// while std::getline successfully reads a line from the source file, store it in the variable line
-		while(std::getline(inFile, line))
-		{
-			// write what is in the line variable to the destination file and append an endline character
-			outFile << line << "\n";
-		}
-		
-		// close files via resource handles, just to be explicit (sorry, RAII)
-		inFile.close();
-		outFile.close();
-		
-		// return true if successfully completed
-		return true;
-	}
-	// catch any exceptions that were thrown
-	catch(...)
-	{
-		// print generic error message to standard error output
-		std::cerr << "[-] error: exception thrown during file copy" << std::endl;
-	}
-	
-	// return false, because function execution won't reach this point if it completed successfully
-	return false;
-}
-
 // define what to do when Copy button is clicked
 void CopyApp::OnCopyEntered(wxCommandEvent& event)
 {
+	Copier copier;
 	// read contents of "sourceEntry" resource, a wxFilePickerCtrl, convert from wxString to std::string, and pass to setter for sourceFile
-	SetSourceFile(XRCCTRL(*(guiManager.GetMainWindow()), "sourceEntry", wxFilePickerCtrl)->GetPath().ToStdString());
+	copier.SetSource(XRCCTRL(*(guiManager.GetMainWindow()), "sourceEntry", wxFilePickerCtrl)->GetPath().ToStdString());
 	// read contents of "destinationEntry" resource, a wxFilePickerCtrl, convert from wxString to std::string, and pass to setter for destinationFile 
-	SetDestinationFile(XRCCTRL(*(guiManager.GetMainWindow()), "destinationEntry", wxFilePickerCtrl)->GetPath().ToStdString());
-	// call workhorse function to copy source file to destination file, using getters to ensure safe access to private variables
-	CopyFile(GetSourceFile(), GetDestinationFile());
+	copier.SetDestination(XRCCTRL(*(guiManager.GetMainWindow()), "destinationEntry", wxFilePickerCtrl)->GetPath().ToStdString());
+	// create workhorse thread executing function to copy source file to destination file, using getters to ensure safe access to private variables
+	std::thread copy_thread(&Copier::CreateCopy, std::ref(copier));
+	// join thread for now, because if we detach it, it won't copy anything yet (will fix soon)
+	copy_thread.joins();
 }
 
 // define what to do when Cancel is clicked
