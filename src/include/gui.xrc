@@ -18,7 +18,7 @@
 		<object class="wxPanel" name="mainPanel">
 			<!-- style flags for wxWidgets object (wxPanel) -->
 			<style>wxTAB_TRAVERSAL</style>
-				<!-- first child of child #1 (object) and class (wxBoxSizer)-->
+			<!-- first child of child #1 (object) and class (wxBoxSizer)-->
 			<object class="wxBoxSizer">
 				<!-- orientation of wxWidgets object (wxBoxSizer) -->
 				<orient>wxVERTICAL</orient>
@@ -156,7 +156,7 @@
 							<border>5</border>
 							<!-- size of spacer -->
 							<size>0,0</size>
-							<!-- end of spacer -->
+						<!-- end of spacer -->
 						</object>
 						<!-- new sizeritem object -->
 						<object class="sizeritem">
@@ -178,7 +178,7 @@
 								<markup>0</markup>
 								<!-- image to display in button (optional; omitted here) -->
 								<bitmap />
-								<!-- end of copyButton -->
+							<!-- end of copyButton -->
 							</object>
 						<!-- end of sizeritem -->
 						</object>
