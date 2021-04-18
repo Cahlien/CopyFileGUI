@@ -1,5 +1,4 @@
-<!-- version of XML used (1.0), character encoding used (UTF-8), and whether it is a complete, independent file (yes) -->
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>		 <!-- XML declaration -->
 <!-- root object (resource), namespace (don't change), and version (2.5.3.0) -->
 <resource xmlns="http://www.wxwidgets.org/wxxrc" version="2.5.3.0">
 	<!-- toplevel item #1 (object), class (wxFrame), and name (mainWindow) -->

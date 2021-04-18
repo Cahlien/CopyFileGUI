@@ -10,13 +10,13 @@ bool CopyApp::OnInit()
 	// initialize all resource handlers for XML resources
 	wxXmlResource::Get()->InitAllHandlers();
 	// load the specified xml resource file
-	wxXmlResource::Get()->Load("/stor/Portfolio/Projects/CopyFileGUI/src/include/gui.xrc");
+	wxXmlResource::Get()->Load("../../../src/include/gui.xrc");
 	
 	// point the wxFrame* win variable at the resource named "mainWindow" in the loaded XML resource files
 	win = wxXmlResource::Get()->LoadFrame(NULL, "mainWindow");
 	
 	// set the wxIcon mainIcon variable to hold the value of the specified file, allowing wxWidgets to figure out the bitmap type
-	mainIcon = wxIcon("/stor/Portfolio/Projects/CopyFileGUI/src/include/Icon16.png", wxBITMAP_TYPE_ANY);
+	mainIcon = wxIcon("../../../src/include/Icon16.png", wxBITMAP_TYPE_ANY);
 	
 	// assign mainIcon as the icon for win
 	win->SetIcon(mainIcon);
