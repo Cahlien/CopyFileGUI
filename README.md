@@ -19,3 +19,13 @@ the proper destruction of all elements of the graphical user interface and relie
 CopyApp class of any responsibilities other than assisting in the construction of the gui
 manager and the assignment of assets to the manager's control.
 </p>
+
+<h2>Multithread</h2>
+<p>
+	The act of copying a file launches a thread which then performs the work.  For the moment,
+this thread joins, forcing the parent thread to wait for it to execute prior to resuming.  This is
+undesired behavior, but is necessary in this transitory stage due to the implementation of the
+OnCopyEntered function, which passes a local copier object to the thread.  That local object
+would be deleted prior to completing the thread's execution if we detached the thread, so fixing
+this is a ToDo item for the next few days.
+</p>
