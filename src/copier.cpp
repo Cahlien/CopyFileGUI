@@ -1,41 +1,57 @@
 #include "copier.h"
 
+// static mutex initialization; will replace with a more elegant solution eventually
+std::mutex Copier::copy_lock{};
+
+// default constructor
 Copier::Copier()
 {
-	
+	status = false;
 }
 
+// destructor
 Copier::~Copier()
 {
 	
 }	
 	
+// get source filename
 std::string Copier::GetSource()
 {
 	return source;
 }
 
+// set source filename
 void Copier::SetSource(const std::string& filename)
 {
 	source = filename;
 }
 
+// get destination filename
 std::string Copier::GetDestination()
 {
 	return destination;
 }
 
+// set destination filename
 void Copier::SetDestination(const std::string& filename)
 {
 	destination = filename;
 }
 
+bool Copier::isFinished()
+{
+	return status;
+}
+// the function that this whole app exists to call
 bool Copier::CreateCopy()
 {
 	// try block so it can fail gracefully
 	try
 	{
+		// instantiate a lock_guard with the static mutex to avoid data races; heavy-handed solution
 		std::lock_guard<std::mutex> lock(copy_lock);
+		
 		// instantiate input and output files and a string variable to transfer the data
 		std::ifstream inFile{};
 		std::ofstream outFile{};
@@ -58,17 +74,14 @@ bool Copier::CreateCopy()
 		outFile.close();
 		
 		// return true if successfully completed
-		return true;
+		status = true;
 	}
 	// catch any exceptions that were thrown
 	catch(...)
 	{
-		// print generic error message to standard error output
-		std::cerr << "[-] error: exception thrown during file copy" << std::endl;
+		// removed the print statement here; we'll add a popup dialog in case of error later
 	}
 	
 	// return false, because function execution won't reach this point if it completed successfully
-	return false;
+	return status;
 }
-
-std::mutex Copier::copy_lock{};

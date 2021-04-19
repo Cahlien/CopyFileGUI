@@ -2,10 +2,7 @@
 	#define _MAIN_APPLICATION_H_ 1
 	
 	#include <chrono>
-	#include <fstream>						// needed for std::ifstream and std::ofstream
-	#include <iostream>						// needed to handle standard input and output
 	#include <thread>
-	#include <mutex>
 	#include <wx/app.h>						// defines wxDECLARE_APP macro, which isn't really required here, but is used
 	#include <wx/wx.h>						// needed for all wxWidgets applications
 	#include <wx/filepicker.h>			// needed for our wxFilePickerCtrls
@@ -27,30 +24,20 @@
 		// declare the OnExit function (how the application closes)
 		virtual int OnExit();
 		
-		// declare the getters and setters for private variables
-		std::string GetSourceFile();
-		void SetSourceFile(const std::string&);
-		std::string GetDestinationFile();
-		void SetDestinationFile(const std::string&);
-		
-		// declare the function that actually does the copying
-		bool CopyFile(const std::string&, const std::string&);
+		// declare getter for gui manager
+		GUIManager* GetGUIManager();
 		
 		// declare the event-handling functions
 		void OnCopyEntered(wxCommandEvent&);
 		void OnCancel(wxCommandEvent&);
 		void OnOK(wxCommandEvent&);
 		
-		// declare the public variable that holds the gui manager
-		GUIManager guiManager;
 	// define the private section of the CopyApp class
 	private:
-		// declare the private variables
-		std::string sourceFile;			// the std::string representation of the source file path
-		std::string destinationFile;	// the std::string representation of the destination file path
+		// declare the private variable for the GUIManager
+		GUIManager guiManager;
 	};
 
 	// invoke wxWidgets' magic to create a getter for the app instance
 	wxDECLARE_APP(CopyApp);
-	
 #endif

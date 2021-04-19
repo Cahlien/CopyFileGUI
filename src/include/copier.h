@@ -1,22 +1,38 @@
-#include <fstream>
-#include <thread>
-#include <mutex>
-#include <iostream>
+#ifndef _COPIER_CLASS_H_ 
+	#define _COPIER_CLASS_H_ 1
+	
+	#include <fstream>					// needed for ifstream and ofstream
+	#include <mutex>						// needed for the mutex and lock_guard
 
-class Copier
-{
-	public:
-		Copier();
-		~Copier();
-		
-		std::string GetSource();
-		void SetSource(const std::string&);
-		std::string GetDestination();
-		void SetDestination(const std::string&);
+	// class responsible for copying the file
+	class Copier
+	{
+		// public section of class
+		public:
+			// constructors and destructors
+			Copier();
+			~Copier();
+			
+			// getters and setters for private variables
+			std::string GetSource();
+			void SetSource(const std::string&);
+			std::string GetDestination();
+			void SetDestination(const std::string&);
+			bool isFinished();
 
-		bool CreateCopy();
-	private:
-		std::string source;
-		std::string destination;
-		static std::mutex copy_lock;
-};
+			// function that does the copying
+			bool CreateCopy();
+
+		// private section of class
+		private:
+			// private variables for source and destination filenames
+			std::string source;
+			std::string destination;
+			
+			// private variable for status
+			bool status;
+			
+			// private static mutex
+			static std::mutex copy_lock;
+	};
+#endif

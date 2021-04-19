@@ -1,5 +1,5 @@
 // include the main.h header that defines the CopyApp class and has all of the required headers
-#include "main.h"
+#include "copyapp.h"
 
 // invoke wxWidgets' magic to instantiate the app
 wxIMPLEMENT_APP(CopyApp);
@@ -43,30 +43,6 @@ int CopyApp::OnExit()
 	exit(0);
 }
 
-// getter for private variable, sourceFile
-std::string CopyApp::GetSourceFile()
-{
-	return sourceFile;
-}
-
-// setter for private variable, sourceFile
-void CopyApp::SetSourceFile(const std::string& name)
-{
-	sourceFile = name;
-}
-
-// getter for private variable, destinationFile
-std::string CopyApp::GetDestinationFile()
-{
-	return destinationFile;
-}
-
-// setter for private variable, destinationFile
-void CopyApp::SetDestinationFile(const std::string& name)
-{
-	destinationFile = name;
-}
-
 // define what to do when Copy button is clicked
 void CopyApp::OnCopyEntered(wxCommandEvent& event)
 {
@@ -78,7 +54,11 @@ void CopyApp::OnCopyEntered(wxCommandEvent& event)
 	// create workhorse thread executing function to copy source file to destination file, using getters to ensure safe access to private variables
 	std::thread copy_thread(&Copier::CreateCopy, std::ref(copier));
 	// join thread for now, because if we detach it, it won't copy anything yet (will fix soon)
-	copy_thread.joins();
+	copy_thread.detach();
+	while(!copier.isFinished())
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
 }
 
 // define what to do when Cancel is clicked
@@ -95,4 +75,9 @@ void CopyApp::OnOK(wxCommandEvent& event)
 	OnCopyEntered(event);
 	// call OnExit to close the application
 	OnExit();
+}
+
+GUIManager* CopyApp::GetGUIManager()
+{
+	return &guiManager;
 }
