@@ -57,7 +57,7 @@ void CopyApp::OnCopyEntered(wxCommandEvent& event)
 	copy_thread.detach();
 	while(!copier.isFinished())
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 }
 
