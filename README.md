@@ -20,7 +20,7 @@ CopyApp class of any responsibilities other than assisting in the construction o
 manager and the assignment of assets to the manager's control.
 </p>
 
-<h2>Multithread</h2>
+<h2>Multithreading</h2>
 <p>
 	The act of copying a file launches a thread which then performs the work.  For the moment,
 this thread joins, forcing the parent thread to wait for it to execute prior to resuming.  This is
