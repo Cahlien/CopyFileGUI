@@ -24,6 +24,9 @@
 			// setter for main window's icon
 			void SetMainWindowIcon(wxIcon);
 			
+			// functions to display error dialog
+			void DisplayErrorDialog(const std::string&);
+			
 			// function to close the gui manager
 			int Close();
 

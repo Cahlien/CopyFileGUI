@@ -1,11 +1,12 @@
 #include "copier.h"
-
+	
 // static mutex initialization; will replace with a more elegant solution eventually
 std::mutex Copier::copy_lock{};
 
 // default constructor
 Copier::Copier()
 {
+	currentException = nullptr;
 	status = false;
 }
 
@@ -43,6 +44,12 @@ bool Copier::isFinished()
 {
 	return status;
 }
+
+std::exception_ptr Copier::GetException()
+{
+	return currentException;
+}
+
 // the function that this whole app exists to call
 bool Copier::CreateCopy()
 {
@@ -76,12 +83,10 @@ bool Copier::CreateCopy()
 		// return true if successfully completed
 		status = true;
 	}
-	// catch any exceptions that were thrown
-	catch(...)
+	catch(std::exception& e)
 	{
-		// removed the print statement here; we'll add a popup dialog in case of error later
+		currentException = std::current_exception();
 	}
-	
 	// return false, because function execution won't reach this point if it completed successfully
 	return status;
 }

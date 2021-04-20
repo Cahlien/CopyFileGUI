@@ -38,6 +38,14 @@ void GUIManager::SetMainWindowIcon(wxIcon icon)
 	mainWindow->SetIcon(*mainWindowIcon);
 }
 
+// display error dialog
+void GUIManager::DisplayErrorDialog(const std::string& errorMessage)
+{
+	wxMessageDialog* error = new wxMessageDialog(NULL, errorMessage, wxT("Error"), wxOK);
+	error->ShowModal();
+	wxDELETE(error);
+}
+
 // function to ensure all elements of the gui are properly dealt with
 int GUIManager::Close()
 {

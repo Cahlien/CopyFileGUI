@@ -4,6 +4,12 @@ cmake_minimum_required(VERSION 3.19.7)
 # specify the name of the project and its current version number
 project(copyfile VERSION 1.0.0)
 
+set(CMAKE_CXX_STANDARD 20)
+
+if(${CMAKE_HOST_WIN32})
+	set(${PROJECT_NAME}_SYSTEM_FLAGS "WIN32")
+endif()
+
 # look for wxWidgets and fail if it can't be found
 find_package(wxWidgets REQUIRED)
 
@@ -12,7 +18,7 @@ find_package(Threads REQUIRED)
 include(${wxWidgets_USE_FILE})
 
 # create an executable with the same name as the project
-add_executable(${PROJECT_NAME})
+add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SYSTEM_FLAGS})
 
 # specify the source files for the executable with the same name as the project 
 target_sources(${PROJECT_NAME} PRIVATE src/copyapp.cpp src/guimanager.cpp src/copier.cpp)
@@ -23,4 +29,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${wxWidgets_LIBRARIES} Threads::Th
 # look for headers included in source code for specified executable in the src/include directory
 target_include_directories(${PROJECT_NAME} PRIVATE src/include)
 
-set(CMAKE_CXX_STANDARD 20)
+
