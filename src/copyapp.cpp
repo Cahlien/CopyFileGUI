@@ -62,7 +62,7 @@ void CopyApp::OnCopyEntered(wxCommandEvent& event)
 			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		}
 		
-		if(copier.GetException())
+		if(copier.GetException() != nullptr)
 		{
 			guiManager.DisplayErrorDialog("Failed to Copy File");
 		}
