@@ -62,8 +62,10 @@ void CopyApp::OnCopyEntered(wxCommandEvent& event)
 			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		}
 		
+		// check to see if an exception was thrown
 		if(copier.GetException() != nullptr)
 		{
+			// if an exception was thrown, display an error dialog
 			guiManager.DisplayErrorDialog("Failed to Copy File");
 		}
 }
@@ -78,12 +80,15 @@ void CopyApp::OnCancel(wxCommandEvent& event)
 // define what to do when OK is clicked
 void CopyApp::OnOK(wxCommandEvent& event)
 {
+	// hide window from user to make application feel faster 
+	guiManager.GetMainWindow()->Show(false);
 	// call OnCopyEntered to perform desired work
 	OnCopyEntered(event);
 	// call OnExit to close the application
 	OnExit();
 }
 
+// getter for the gui manager
 GUIManager* CopyApp::GetGUIManager()
 {
 	return &guiManager;
