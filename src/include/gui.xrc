@@ -1,249 +1,125 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>		 <!-- XML declaration -->
-<!-- root object (resource), namespace (don't change), and version (2.5.3.0) -->
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <resource xmlns="http://www.wxwidgets.org/wxxrc" version="2.5.3.0">
-	<!-- toplevel item #1 (object), class (wxFrame), and name (mainWindow) -->
 	<object class="wxFrame" name="mainWindow">
-		<!-- style flags for specified wxWidgets object (wxFrame) -->
 		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
-		<!-- size for wxFrame object -->
 		<size>500,300</size>
-		<!-- title for wxFrame object -->
 		<title>Copy File</title>
-		<!-- centered flag -->
 		<centered>1</centered>
-		<!-- aui_managed flag -->
 		<aui_managed>0</aui_managed>
-		<!-- first child of toplevel item #1 (object), class (wxPanel), and name (mainPanel) -->
 		<object class="wxPanel" name="mainPanel">
-			<!-- style flags for wxWidgets object (wxPanel) -->
 			<style>wxTAB_TRAVERSAL</style>
-			<!-- first child of child #1 (object) and class (wxBoxSizer)-->
 			<object class="wxBoxSizer">
-				<!-- orientation of wxWidgets object (wxBoxSizer) -->
 				<orient>wxVERTICAL</orient>
-				<!-- first child of first child of child #1 (object) and class (sizeritem) -->
 				<object class="sizeritem">
-					<!-- option flags for wxWidgets object (sizeritem) -->
 					<option>1</option>
-					<!-- behavior flag for wxEXPAND -->
 					<flag>wxEXPAND</flag>
-					<!-- border width -->
 					<border>5</border>
-					<!-- first child of sizeritem (object) and class (wxBoxSizer) -->
 					<object class="wxBoxSizer">
-						<!-- orientation of wxWidgets object (wxBoxSizer) -->
 						<orient>wxHORIZONTAL</orient>
-						<!-- first child of wxBoxSizer -->
 						<object class="sizeritem">
-							<!-- proportion option (0 for static) -->
 							<option>0</option>
-							<!-- flags for centering horizontally and vertically and for a border on all sides -->
 							<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL</flag>
-							<!-- border width -->
 							<border>5</border>
-							<!-- new child object of sizeritem -->
 							<object class="wxStaticText" name="sourceLabel">
-								<!-- label -->
 								<label>File to Copy</label>
-								<!-- text wrap flag, -1 for default -->
 								<wrap>-1</wrap>
-							<!-- endo f sourceLabel object -->
 							</object>
-						<!-- end of sizeritem object -->
 						</object>
-						<!-- new sizeritem object -->
 						<object class="sizeritem">
-							<!-- proportion option -->
 							<option>1</option>
-							<!-- object flags -->
 							<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
-							<!-- border width -->
 							<border>5</border>
-							<!-- new wxFilePickerCtrl object -->
 							<object class="wxFilePickerCtrl" name="sourceEntry">
-								<!-- default location (empty) -->
 								<value></value>
-								<!-- message displayed to user in dialog -->
 								<message>Select a file</message>
-								<!-- specify file type(s) -->
 								<wildcard>*.*</wildcard>
-								<!-- style flags -->
 								<style>wxFLP_DEFAULT_STYLE|wxFLP_USE_TEXTCTRL</style>
-							<!-- close sourceEntry -->
 							</object>
-						<!-- close sizeritem -->
 						</object>
-					<!-- close wxBoxSizer -->
 					</object>
-				<!-- close sizeritem -->
 				</object>
-				<!-- new sizeritem object -->
 				<object class="sizeritem">
-					<!-- proportion (1) -->
 					<option>1</option>
-					<!-- style flags -->
 					<flag>wxEXPAND</flag>
-					<!-- border width -->
 					<border>5</border>
-					<!-- new child wxBoxSizer -->
 					<object class="wxBoxSizer">
-						<!-- orientation of wxBoxSizer -->
 						<orient>wxHORIZONTAL</orient>
-						<!-- new sizeritem -->
 						<object class="sizeritem">
-							<!-- propotion of 0 (static size) -->
 							<option>0</option>
-							<!-- style flags -->
 							<flag>wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL</flag>
-							<!-- border width -->
 							<border>5</border>
-							<!-- new static text object -->
 							<object class="wxStaticText" name="destinationLabel">
-								<!-- label for static text -->
 								<label>Destination</label>
-								<!-- wrap flag, -1 for default -->
 								<wrap>-1</wrap>
-							<!-- end of static text -->
 							</object>
-						<!-- end of sizeritem -->
 						</object>
-						<!-- new sizeritem object  -->
 						<object class="sizeritem">
-							<!-- proportion of 1 -->
 							<option>1</option>
-							<!-- style flags for sizeritem -->
 							<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
-							<!-- border width -->
 							<border>5</border>
-							<!-- new wxFilePickerCtrl object -->
 							<object class="wxFilePickerCtrl" name="destinationEntry">
-								<!-- default value (empty) -->
 								<value></value>
-								<!-- message displayed in dialog -->
 								<message>Select a file</message>
-								<!-- specified file type(s) -->
 								<wildcard>*.*</wildcard>
-								<!-- style flags -->
 								<style>wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE|wxFLP_USE_TEXTCTRL</style>
-							<!-- end of wxFilePickerCtrl object -->
 							</object>
-						<!-- end of sizeritem -->
 						</object>
-					<!-- end of wxBoxSizer -->
 					</object>
-				<!-- end of sizeritem  -->
 				</object>
-				<!-- new sizeritem object  -->
 				<object class="sizeritem">
-					<!-- proportion 0 (static) -->
 					<option>0</option>
-					<!-- style flags -->
 					<flag>wxEXPAND</flag>
-					<!-- border width -->
 					<border>5</border>
-					<!-- new wxBoxSizer object -->
 					<object class="wxBoxSizer">
-						<!-- orientation of wxBoxSizer object -->
 						<orient>wxHORIZONTAL</orient>
-						<!-- new spacer object -->
 						<object class="spacer">
-							<!-- proportion 1 -->
 							<option>1</option>
-							<!-- style flags -->
 							<flag>wxEXPAND</flag>
-							<!-- border width -->
 							<border>5</border>
-							<!-- size of spacer -->
 							<size>0,0</size>
-						<!-- end of spacer -->
 						</object>
-						<!-- new sizeritem object -->
 						<object class="sizeritem">
-							<!-- proportion 1 -->
 							<option>1</option>
-							<!-- style flags -->
 							<flag>wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND</flag>
-							<!-- border width -->
 							<border>5</border>
-							<!-- new wxButton object named copyButton-->
 							<object class="wxButton" name="copyButton">
-								<!-- text on button -->
 								<label>Copy</label>
-								<!-- is this the default button? (0 = false) -->
 								<default>0</default>
-								<!-- is authorization needed? (0 = false) -->
 								<auth_needed>0</auth_needed>
-								<!-- does button contain markup language? (0 = false) -->
 								<markup>0</markup>
-								<!-- image to display in button (optional; omitted here) -->
 								<bitmap />
-							<!-- end of copyButton -->
 							</object>
-						<!-- end of sizeritem -->
 						</object>
-						<!-- new spacer object -->
 						<object class="spacer">
-							<!-- proportion 1 -->
 							<option>1</option>
-							<!-- style flags -->
 							<flag>wxEXPAND</flag>
-							<!-- border width -->
 							<border>5</border>
-							<!-- size of the empty space in the spacer -->
 							<size>0,0</size>
-						<!-- end of spacer -->
 						</object>
-					<!-- end of wxBoxSizer -->
 					</object>
-				<!-- end of sizeritem -->
 				</object>
-				<!-- new sizeritem object -->
 				<object class="sizeritem">
-					<!-- proportion 1 -->
 					<option>1</option>
-					<!-- style flags -->
 					<flag>wxEXPAND</flag>
-					<!-- border width -->
 					<border>5</border>
-					<!-- new wxStdDialogButtonSizer object -->
 					<object class="wxStdDialogButtonSizer">
-						<!-- new button object -->
 						<object class="button">
-							<!-- style flags for button -->
 							<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
-							<!-- border width for button -->
 							<border>5</border>
-							<!-- new wxButton object named wxID_OK -->
 							<object class="wxButton" name="wxID_OK">
-								<!-- text inside wxID_OK -->
 								<label>&amp;OK</label>
-							<!-- end of wxID_OK -->
 							</object>
-						<!-- end of button object -->
 						</object>
-						<!-- new button object -->
 						<object class="button">
-							<!-- style flags -->
 							<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
-							<!-- border width -->
 							<border>5</border>
-							<!-- new wxButton object named wxID_CANCEL -->
 							<object class="wxButton" name="wxID_CANCEL">
-								<!-- text inside wxID_CANCEL -->
 								<label>&amp;Cancel</label>
-							<!-- end wxID_CANCEL -->
 							</object>
-						<!-- end button object -->
 						</object>
-					<!-- end wxStdDialogButtonSizer -->
 					</object>
-				<!-- end sizeritem -->
 				</object>
-			<!-- end wxBoxSizer -->
 			</object>
-		<!-- end wxPanel -->
 		</object>
-	<!-- end wxFrame -->
 	</object>
-<!-- end resource -->
 </resource>

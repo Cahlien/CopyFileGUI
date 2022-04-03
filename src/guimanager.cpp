@@ -1,44 +1,53 @@
-// include the gui manager header
 #include "guimanager.h"
 
-// blank default constructor for gui manager
+
 GUIManager::GUIManager()
 {
-	
+	wxXmlResource::Get()->InitAllHandlers();
 }
 
-// gui manager's destructor calls GUIManager::Close()
+
 GUIManager::~GUIManager()
 {
+	mainWindow->Destroy();
 	Close();
 }
 
-// getter for the main window
+
 wxFrame* GUIManager::GetMainWindow()
 {
 	return mainWindow;
 }
 
-// setter for the main window
-void GUIManager::SetMainWindow(wxFrame* frame)
+
+void GUIManager::SetMainWindow(const std::string& win)
 {
-		mainWindow = frame;
+	
+	mainWindow = wxXmlResource::Get()->LoadFrame(NULL, win);
 }
 
-// getter for the main window's icon
+
 wxIcon* GUIManager::GetMainWindowIcon()
 {
 	return mainWindowIcon;
 }
 
-// setter for the main window's icon
-void GUIManager::SetMainWindowIcon(wxIcon icon)
+
+void GUIManager::SetMainWindowIcon(const std::string& filepath)
 {
-	mainWindowIcon = &icon;
+	
+	mainWindowIcon = new wxIcon(filepath, wxBITMAP_TYPE_ANY);
 	mainWindow->SetIcon(*mainWindowIcon);
 }
 
-// display error dialog
+
+void GUIManager::ShowMainWindow(const bool& visibility)
+{
+	wxTheApp->SetTopWindow(mainWindow);
+	mainWindow->Show(visibility);
+}
+
+
 void GUIManager::DisplayErrorDialog(const std::string& errorMessage)
 {
 	wxMessageDialog* error = new wxMessageDialog(NULL, errorMessage, wxT("Error"), wxOK);
@@ -46,9 +55,9 @@ void GUIManager::DisplayErrorDialog(const std::string& errorMessage)
 	wxDELETE(error);
 }
 
-// function to ensure all elements of the gui are properly dealt with
+
 int GUIManager::Close()
 {
-	mainWindow->Destroy();
+	mainWindow->Close(TRUE);
 	return 0;
 }

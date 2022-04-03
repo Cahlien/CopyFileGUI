@@ -1,0 +1,12 @@
+version: '3'
+services:
+  copyfilegui:
+    image: copyfilegui:latest
+    build: .
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /:/pc
+    network_mode: host
+#   possible command: x11vnc -forever -usepw -create

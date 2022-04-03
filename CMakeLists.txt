@@ -1,32 +1,22 @@
-# specify the minimum version of CMake required to build this project
 cmake_minimum_required(VERSION 3.19.7)
 
-# specify the name of the project and its current version number
+set(CMAKE_CXX_COMPILER /usr/bin/g++)
+
 project(copyfile VERSION 1.0.0)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
+add_compile_options(-fabi-version=15 -fno-exceptions -O3)
 
 if(${CMAKE_HOST_WIN32})
 	set(${PROJECT_NAME}_SYSTEM_FLAGS "WIN32")
 endif()
 
-# look for wxWidgets and fail if it can't be found
 find_package(wxWidgets REQUIRED)
-
-find_package(Threads REQUIRED)
-# load and run the code from the convenience file, wxWidgets_USE_FILE
 include(${wxWidgets_USE_FILE})
 
-# create an executable with the same name as the project
+find_package(Threads REQUIRED)
+
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SYSTEM_FLAGS})
-
-# specify the source files for the executable with the same name as the project 
 target_sources(${PROJECT_NAME} PRIVATE src/copyapp.cpp src/guimanager.cpp src/copier.cpp)
-
-# link the wxWidgets libraries to the executable with the same name as the project
 target_link_libraries(${PROJECT_NAME} PRIVATE ${wxWidgets_LIBRARIES} Threads::Threads)
-
-# look for headers included in source code for specified executable in the src/include directory
 target_include_directories(${PROJECT_NAME} PRIVATE src/include)
-
-
